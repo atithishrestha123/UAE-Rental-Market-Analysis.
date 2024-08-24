@@ -1,0 +1,176 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+
+\title{Assessment Two}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{0.5cm}
+    \includegraphics[width=0.8\textwidth]{"../Quiz-1/Collegelogo.png"}\\[1cm] 
+    {\Large Author: Atithi Shrestha}\\[0.5cm]
+    {\large Module: Data Visualisation}\\[0.5cm]
+    {\large Module Code: CMP5352}\\[0.5cm]
+    {\large Tutor: Rupak Koirala}\\[0.5 cm]
+    {\large Student ID: 23140734}\\[0.5cm]
+    \vspace*{\fill}
+11$^{th}$ May, 2024
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+\listoftables
+\newpage
+
+\section{Loading Necessary Libraries}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(ggplot2)}
+\hlkwd{library}\hlstd{(knitr)}
+\hlkwd{library}\hlstd{(kableExtra)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\section{Loading the Dataset}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{data} \hlkwb{<-} \hlkwd{read.csv}\hlstd{(}\hlstr{"dubai_properties.csv"}\hlstd{)}
+\hlkwd{View}\hlstd{(data)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\section{Data Structure}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{head}\hlstd{(data,} \hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                                                                                             Address
+## 1 The Gate Tower 2, The Gate Tower, Shams Gate District, Shams Abu Dhabi, Al Reem Island, Abu Dhabi
+## 2                                                               Water's Edge, Yas Island, Abu Dhabi
+## 3                                                           Al Raha Lofts, Al Raha Beach, Abu Dhabi
+## 4                                          Marina Heights, Marina Square, Al Reem Island, Abu Dhabi
+## 5                                                                   West Yas, Yas Island, Abu Dhabi
+##     Rent Beds Baths      Type Area_in_sqft Rent_per_sqft Rent_category
+## 1 124000    3     4 Apartment         1785      69.46779        Medium
+## 2 140000    3     4 Apartment         1422      98.45288        Medium
+## 3  99000    2     3 Apartment         1314      75.34247        Medium
+## 4 220000    3     4 Penthouse         3843      57.24694          High
+## 5 350000    5     7     Villa         6860      51.02041          High
+##   Frequency  Furnishing  Purpose Posted_date Age_of_listing_in_days
+## 1    Yearly Unfurnished For Rent  2024-03-07                     45
+## 2    Yearly Unfurnished For Rent  2024-03-08                     44
+## 3    Yearly   Furnished For Rent  2024-03-21                     31
+## 4    Yearly Unfurnished For Rent  2024-02-24                     57
+## 5    Yearly Unfurnished For Rent  2024-02-16                     65
+##         Location      City Latitude Longitude
+## 1 Al Reem Island Abu Dhabi 24.49360  54.40784
+## 2     Yas Island Abu Dhabi 24.49402  54.60737
+## 3  Al Raha Beach Abu Dhabi 24.48593  54.60094
+## 4 Al Reem Island Abu Dhabi 24.49360  54.40784
+## 5     Yas Island Abu Dhabi 24.49402  54.60737
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{tail}\hlstd{(data,} \hlnum{5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                                      Address  Rent Beds Baths      Type
+## 73738 Al Huboob 1, Al Salamah, Umm Al Quwain 14000    0     1 Apartment
+## 73739    Umm Al Quwain Marina, Umm Al Quwain 14000    0     1 Apartment
+## 73740      King Faisal Street, Umm Al Quwain 50000    3     4 Apartment
+## 73741               Al Maqtaa, Umm Al Quwain 37000    1     2 Apartment
+## 73742                 Al Rass, Umm Al Quwain 11000    0     1 Apartment
+##       Area_in_sqft Rent_per_sqft Rent_category Frequency  Furnishing  Purpose
+## 73738          419      33.41289           Low    Yearly Unfurnished For Rent
+## 73739          500      28.00000           Low    Yearly Unfurnished For Rent
+## 73740         2000      25.00000           Low    Yearly Unfurnished For Rent
+## 73741          989      37.41153           Low    Yearly Unfurnished For Rent
+## 73742          300      36.66667           Low    Yearly Unfurnished For Rent
+##       Posted_date Age_of_listing_in_days             Location          City
+## 73738  2023-12-14                    129           Al Salamah Umm Al Quwain
+## 73739  2023-12-14                    129 Umm Al Quwain Marina Umm Al Quwain
+## 73740  2024-01-02                    110   King Faisal Street Umm Al Quwain
+## 73741  2023-10-23                    181            Al Maqtaa Umm Al Quwain
+## 73742  2024-02-12                     69              Al Rass Umm Al Quwain
+##       Latitude Longitude
+## 73738 25.49341  55.57599
+## 73739 25.52796  55.60653
+## 73740       NA        NA
+## 73741       NA        NA
+## 73742       NA        NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\end{document}

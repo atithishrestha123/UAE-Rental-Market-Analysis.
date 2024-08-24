@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+
+\title{Assessment Two}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{0.5cm}
+    \includegraphics[width=0.8\textwidth]{"../Quiz-1/Collegelogo.png"}\\[1cm] 
+    {\Large Author: Atithi Shrestha}\\[0.5cm]
+    {\large Module: Data Visualisation}\\[0.5cm]
+    {\large Module Code: CMP5352}\\[0.5cm]
+    {\large Tutor: Rupak Koirala}\\[0.5 cm]
+    {\large Student ID: 23140734}\\[0.5cm]
+    \vspace*{\fill}
+11$^{th}$ May, 2024
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+\listoftables
+\newpage
+
+\section{Loading Necessary Libraries}
+<<message = FALSE, error = FALSE, warning = FALSE>>=
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+@
+
+\section{Loading the Dataset}
+<<message = FALSE, error = FALSE, warning = FALSE>>=
+data <- read.csv("dubai_properties.csv")
+View(data)
+@
+
+\section{Data Structure}
+<<message = FALSE, error = FALSE, warning = FALSE>>=
+head(data, 5)
+@
+
+<<message = FALSE, error = FALSE, warning = FALSE>>=
+tail(data, 5)
+@
+
+
+\end{document}
